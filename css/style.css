@@ -1,0 +1,54 @@
+html {
+    background: #1a1a1d;
+    color: white;
+}
+
+nav {
+    margin: 50px;
+    display: block;
+}
+
+main {
+    float: right;
+    width: 70%;
+    background: #4e4e50;    
+    margin: 20px;
+}
+
+main section {
+    margin: 20px;
+    background: #c3073f;
+}
+
+main section ul{
+    margin: 20px;
+    border: 5px solid #0aeeee;
+}
+
+main section li{
+    margin: 20px;
+    padding: 5px;
+    display: inline-block;
+    border: 5px solid black;
+}
+
+main article {
+    margin: 10px;
+    background: #950740;
+}
+
+aside {
+
+    width: 20%;
+    float: left;
+    margin: 10px;
+    background: #950740;
+}
+
+footer {
+    display: block;
+    position: absolute;
+    margin: 20px;
+    background: #6f2232;
+    bottom: 0;
+}

@@ -32,6 +32,11 @@ main section li{
     border: 5px solid black;
 }
 
+main section li img {
+    width: 200px;
+    height: 200px;
+}
+
 main article {
     margin: 10px;
     background: #950740;

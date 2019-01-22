@@ -1,6 +1,9 @@
 // globsl variables
 allImages = [];
+var imageHolder = document.getElementById('imageHolder');
 var imageOne = document.getElementById('imageOne');
+var imageTwo = document.getElementById('imageTwo');
+var imageThree = document.getElementById('imageThree');
 
 //Objects
 new image('bag');
@@ -24,6 +27,7 @@ new image('unicorn');
 new image('water-can');
 new image('wine-glass');
 
+imageTag = [imageOne, imageTwo, imageThree];
 
 // constructor function
 function image(name){
@@ -33,22 +37,27 @@ function image(name){
     allImages.push(this)
 }
 
-//random image function
-function showRandomImage(){
-    var random = Math.floor(Math.random() * allImages.length);
-    imageOne.src = allImages[random].filepath;
-    imageOne.alt = allImages[random].name;
-    imageOne.title = allImages[random].name;
-    allImages[random].views++;
+
+
+function loadRandomImages(){
+    for(i = 0; i < 3; i++){
+        var random = Math.floor(Math.random() * allImages.length);
+        imageTag[i].src = allImages[random].filepath;
+        imageTag[i].alt = allImages[random].name;
+        imageTag[i].title = allImages[random].name;
+        allImages[random].views++;
+        
+    }
 }
 
-showRandomImage();
+
+loadRandomImages();
 
 //event listener
 
-imageOne.addEventListener('click', clickHandler);
+imageHolder.addEventListener('click', clickHandler);
 
 function clickHandler(event){
-    console.log(event.target);
-    showRandomImage();
+    console.log(event.target.alt);
+    loadRandomImages();
 }

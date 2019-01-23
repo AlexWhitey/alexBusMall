@@ -1,3 +1,5 @@
+'use strict';
+
 // globsl variables
 var allImages = [];
 var imageHolder = document.getElementById('imageHolder');

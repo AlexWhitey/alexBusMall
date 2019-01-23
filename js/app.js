@@ -1,39 +1,15 @@
 'use strict';
 
 // globsl variables
+var names = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 var allImages = [];
 var imageHolder = document.getElementById('imageHolder');
-var imageOne = document.getElementById('imageOne');
-var imageTwo = document.getElementById('imageTwo');
-var imageThree = document.getElementById('imageThree');
 var ctx = document.getElementById("myChart").getContext("2d");
-var imageTag = [imageOne, imageTwo, imageThree];
+var imageTag = [document.getElementById('imageOne'), document.getElementById('imageTwo'), document.getElementById('imageThree')];
 var randomArray = [];
-var testArray = [];
 var randomStored = [];
 var totalClicks = 0;
-
-//Objects
-new Image('bag');
-new Image('banana');
-new Image('bathroom');
-new Image('boots');
-new Image('breakfast');
-new Image('bubblegum');
-new Image('chair');
-new Image('cthulhu');
-new Image('dog-duck');
-new Image('dragon');
-new Image('pen');
-new Image('pet-sweep');
-new Image('scissors');
-new Image('shark');
-new Image('sweep');
-new Image('tauntaun');
-new Image('unicorn');
-new Image('usb');
-new Image('water-can');
-new Image('wine-glass');
+var ticks = [];
 
 // constructor function
 function Image(name){
@@ -43,6 +19,12 @@ function Image(name){
 		this.clicks = 0;
     allImages.push(this)
 }
+
+for (var i = 0; i < names.length; i++){
+	new Image(names[i]);
+}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function chooseRandomNumbers(){
 	randomArray = [];
@@ -67,7 +49,7 @@ function compare(){
 
 // Random Image Generator
 function loadRandomImages(){
-    for(i = 0; i < 3; i++){
+    for(var i = 0; i < 3; i++){
         imageTag[i].src = allImages[randomArray[i]].filepath;
         imageTag[i].alt = allImages[randomArray[i]].name;
         imageTag[i].title = allImages[randomArray[i]].name;
@@ -75,9 +57,17 @@ function loadRandomImages(){
     }
 }
 
+//Update chart function
+function updateChartArrays() {
+  for (var i = 0; i < allImages.length; i++) {
+    ticks[i] = allImages[i].clicks;
+  }
+}
+
 //event listener
 imageHolder.addEventListener('click', clickHandler);
 
+// click handler function
 function clickHandler(event){
 	console.log(event.target.alt);
 	for (var i = 0; i < allImages.length; i++){
@@ -90,6 +80,7 @@ function clickHandler(event){
 	if(totalClicks === 25){
 		imageHolder.removeEventListener('click', clickHandler);
 		//show results
+		callChart();
 		return;
 }
 randomStored = randomArray;
@@ -102,13 +93,17 @@ function pageLoader(){
 	loadRandomImages();
 }
 
+
+//chart
+function callChart(){
+	updateChartArrays();
 var myChart = new Chart(ctx, {
 	type: 'bar',
 	data: {
-			labels: allImages,
+			labels: names,
 			datasets: [{
 					label: 'Products',
-					data: [1,2,3,4,5,6,7,8,9,10], //placeholders
+					data: ticks, //placeholders
 					backgroundColor: [
 							'rgba(255, 99, 132, 0.2)',
 							'rgba(54, 162, 235, 0.2)',
@@ -138,5 +133,5 @@ var myChart = new Chart(ctx, {
 			}
 	}
 });
-
+} 	
 pageLoader();

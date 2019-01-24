@@ -20,6 +20,19 @@ function Image(name){
     allImages.push(this)
 }
 
+var render = JSON.parse(localStorage.getItem('imageStorage'));
+
+if(render === null) {
+	objectCreate();
+	chooseRandomNumbers();
+	compare();
+	loadRandomImages();
+} else {
+	allImages = render;
+	chooseRandomNumbers();
+	compare();
+	loadRandomImages();
+}
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
